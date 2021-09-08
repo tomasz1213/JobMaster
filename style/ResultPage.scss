@@ -1,0 +1,36 @@
+.ResultPage{
+    visibility: hidden;
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    width: 80%;
+    margin-top: -150px;
+    color: #334680;
+ 
+    &__sidebar{
+        display:flex;
+        width: 25%;
+        height: 100%;
+        flex-direction: column;
+        
+        &--Returnbtn{
+            cursor: pointer;
+            margin-bottom: 40px;
+            color: #1E86FF;
+            width: 200px;
+            height: 40px;
+            text-align: center;
+            padding: 4px;
+        }
+        &--howto{
+            color: #B9BDCF;
+        }
+
+    }
+    &__maincontent{
+        
+        position: relative;
+        width: 75%;
+        height: 100%;
+    }
+}

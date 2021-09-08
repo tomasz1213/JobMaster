@@ -1,0 +1,72 @@
+.header{
+    height: 180px;
+    font-family: 'Poppins', sans-serif;
+    font-size:24px;
+    .logo{
+        color: black !important;
+        display: inline-block;
+        margin-top: 25px;
+        margin-bottom: 25px;
+        font-weight: 500;
+        &--first{
+            font-weight: 700;
+        }
+    }
+    &__search{
+        height: 65%;
+        width: 100%;
+        background-image: url(../backgroundImg.png);
+        background-size: cover;
+        border-top: 1px;
+        border-top-radius: 15px;
+        
+        &--form{
+            @media (max-width:$mobileSize){
+                width:100%;
+                
+            }
+            display:flex;
+            flex-direction:row;
+            padding:2px;
+            height: 40%;
+            width: 100%;
+        }
+        &--input{
+            @media (max-width:$mobileSize){
+                width:100%;
+                font-size: 12px;
+                left: 5%;
+            }
+            position: relative;
+            left: 20%;
+            top: 60%;
+            width: 60%;
+            height: 100%;
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            border:none;
+            padding: 3px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
+        }
+        &--button{
+            @media (max-width:$mobileSize){
+                width:17%;
+                left: -10%;
+                font-size: 50%;
+            }
+            cursor: pointer;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            position: relative;
+            left: 11.8%;
+            top: 68%;
+            width: 8%;
+            height: 98%;
+            border:none;
+            background: #1E86FF;
+            color:white;
+            border-radius: 4px;
+        }
+    }
+}

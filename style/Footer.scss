@@ -1,0 +1,17 @@
+.footer {
+    @media (max-width:$mobileSize){
+        position: relative;
+        bottom: -40px;
+    }
+    box-sizing: content-box;
+    margin-top: 50px;
+    width: 70%;
+    height: 2%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0;
+    color: grey;
+    position: absolute; 
+    left: 0 ; right: 0; bottom: 0; 
+}

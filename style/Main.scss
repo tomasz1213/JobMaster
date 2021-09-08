@@ -1,0 +1,247 @@
+.main {
+    @media (max-width:$mobileSize){
+        flex-direction: column;
+        margin: 0 auto -50px;
+          min-height: 100%;
+    }
+    height: 70%;
+    width:100%;
+    margin-top: 60px;
+    display: flex;
+    font-family: 'Poppins', sans-serif;
+    flex-direction: row;
+
+    &__filter{
+        width: 35%;
+        height: 100%;
+        
+        &--form{
+            align-items: center;
+            width:100px;
+            height: 120px;
+            margin-top: 26px;
+            margin-left: 15px;
+            font-size:15px;
+            cursor: pointer;
+        }
+        .checkbox{
+            @media (max-width:$mobileSize){
+                margin-top: 40px;
+            }
+            margin-left: 15px;
+            font-size: 15px;
+            text-align: center;
+            display: flex; 
+            align-items: center;
+            &__input{
+                flex:none;
+                width: 17px;
+                height: 17px;
+                margin-right: 3px;
+                cursor: pointer;
+            }
+            &__city{
+                width: 17px;
+                height: 17px;
+                margin-right: 3px;
+                cursor: pointer;
+            }
+        }
+        &--p{
+            margin-top: 25px;
+            color: #B9BDCF;
+            font-size:15px;
+            font-weight:700;
+        }
+        &--input{
+            @media (max-width:$mobileSize){
+                width:90vw;
+            }
+            padding: 3px;
+            margin-top: 15px;
+            width: 80%;
+            height: 40px;
+            background: #FFFFFF;
+            border: none;
+            border-radius: 4px;
+            box-shadow: 0px 1px 2px rgba(177, 173, 173, 0.904);
+        }
+    }
+    .Pages{
+        @media (max-width:$mobileSize){
+            left:50px;
+            bottom:0;
+        }
+
+        position: absolute;
+        user-select: none;
+        display: flex;
+        height: 40px;
+        right: 190px;
+        bottom: 50px;
+
+
+        &__page{
+            @media (max-width:$mobileSize){
+                display: none;
+            }
+            cursor: pointer;
+            font-size: 18px;
+            width: 40px;
+            height: 40px;
+            margin-left: 10px;
+            border: 1px solid #B7BCCE;
+            box-sizing: border-box;
+            border-radius: 4px;
+            text-align: center;
+            padding: 4px;
+            color: #B9BDCF;
+        }
+        &__page:hover{
+            color: #1E86FF;
+            border: 1px solid #1E86FF;
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+        &__page--active{
+            background: #1E86FF;
+            color:white;
+        }
+        &__page--active:hover{
+            color: #1E86FF;
+            border: 1px solid #1E86FF;
+            box-sizing: border-box;
+            border-radius: 4px;
+            background:local;
+        }
+        &__page--dots{
+                font-size: 24px;
+                width: 40px;
+                height: 40px;
+                margin-left: 10px;
+                box-sizing: border-box;
+                text-align: center;
+                padding: 4px;
+                color: #B9BDCF;
+        }
+    }
+    &__results{
+        @media (max-width:$mobileSize){
+            width: 92vw;
+        }
+        width: 65%;
+        height: 100%;
+
+        
+
+        .Jobitem{
+            @media (max-width:$mobileSize){
+                width: 92vw;
+            }
+            user-select: none;
+            font-family: 'Roboto', sans-serif;
+            background-color: white;
+            width: 100%;
+            height: 130px;
+            margin-bottom: 20px;
+            cursor: pointer;
+
+            &__mobile{
+                @media (min-width:$mobileSize){
+                    display:none;
+                    margin-bottom: 0;
+                }
+                
+                position: relative;
+                cursor: pointer;
+                margin-top: 20px;
+                font-size: 18px;
+                width: 250px;
+                height: 40px;
+                border: 1px solid #B7BCCE;
+                box-sizing: border-box;
+                border-radius: 4px;
+                text-align: center;
+                padding: 4px;
+                color: #B9BDCF;
+                left: 140px;
+            }
+            &__mobile:hover{
+                color: #1E86FF;
+                border: 1px solid #1E86FF;
+                box-sizing: border-box;
+                border-radius: 4px;
+            }
+
+            &__image{
+                display:inline-block;
+                height: 100px;
+                width: 100px;
+                margin:15px 16px 15px 15px; 
+                background-size: cover;
+                background-position: center;
+            }
+            &__company{
+                position: relative;
+                font-size:12px;
+                font-weight: 700;
+                color: #334680;
+                width: 100px;
+                top: -110px;
+            }
+            &__occupation{
+                @media (max-width:$mobileSize){
+                    font-size: 12px;
+                    top: -90px;
+                }
+                position: relative;
+                width:100%;
+                height: 40px;
+                font-size: 18px;
+                font-weight:normal;
+                color:#334680;
+                top: -80px;
+                left: 132px;
+            }
+            &__type{
+                position: relative;
+                font-style: normal;
+                font-weight: bold;
+                font-size: 12px;
+                color:#334680;
+                border: 1px solid #334680;
+                box-sizing: border-box;
+                border-radius: 4px;
+                width: 63px;
+                height: 26px;
+                padding: 3px;
+                top: -55px;
+                left: 132px;
+            }
+            &__city{
+                @media(max-width:$mobileSize){
+                    right:130px;
+                }
+                position: relative;
+                float: right;
+                font-weight: 500;
+                font-size: 12px;
+                color: #B9BDCF;
+                right: 160px;
+                top: -55px;
+                text-align:right;
+            }
+            &__posted{
+
+    
+                text-align: right;
+                position: relative;
+                font-weight: 500;
+                font-size: 12px;
+                color: #B9BDCF;
+                right: 30px;
+                top: -75px;
+            }
+        }
+    }
+}

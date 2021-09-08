@@ -1,0 +1,17 @@
+@import './Resets.scss';
+@import './Header.scss';
+@import './ResultPage.scss';
+@import './Main.scss';
+@import './Footer.scss';
+
+.wrap {
+    @media (max-width:$mobileSize){
+        margin: 10px 10px 10px 10px !important;
+        width: 93vw;
+        height: 100vh;
+    }
+    margin-left: auto;
+    margin-right: auto;
+    width: 80vw;
+    height: 100vh;
+}
