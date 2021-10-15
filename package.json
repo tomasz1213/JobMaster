@@ -36,5 +36,8 @@
       "globalReturn": true
     }
   },
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "axios": "^0.23.0"
+  }
 }

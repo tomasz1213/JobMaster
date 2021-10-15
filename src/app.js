@@ -1,10 +1,8 @@
 const jobitem = document.querySelector('.main__results');
-//import resultPage from './resultPage';
-
-let dataArray = []; // data holder
+const dataArray = [];
 let page = 1; // Number of pages with results
 let counter = 0; // count to 4 then move to next page
-let currentPage = 1; // desc..
+let currentPage = 1;
 
 class JobElement{
     constructor(company,company_logo,company_url,created_at,description,how_to_apply,id,location,title,type,url,page) {
@@ -20,39 +18,41 @@ class JobElement{
         this.type = type;
         this.url = url;
         this.page = page;   
-    }
-
-}
-
+    };
+};
 
 class Form {
     constructor(description, city = 'Berlin', fulltime = false){
         this.city = city;
         this.fulltime = fulltime;
         this.description = description;
-    }
-}
-let form = new Form();
-
-const dataHandler = (description, location, fulltime) => { // Getting data from GitApi
-    fetch(`https://jobs.github.com/positions.json?location=${location}&&full_time=${fulltime}${description ? `&description=${description}` : ''}`)
+    };
+};
+const form = new Form();
+const dataHandler = async () => { // Getting data from GitApi
+   await fetch(`https://t0m3k-fc4e7-default-rtdb.europe-west1.firebasedatabase.app/job.json`)
     .then(response => {
         if (response.ok) {
             return response.json();
         } else {
-            return Promise.reject(`Http error: ${response.status}`);
+            return console.error(`Http error: ${response.status}`);
         }
     })
     .then(response => {
-        saveData(response);
+        const arr = [];
+        for(let [key, value] of Object.entries(response)){
+            console.log(response)
+            arr.push({key,...value});
+        }
+        saveData(arr);
+        console.log(arr)
     })
     .catch(error => {
         console.error(error);
     });
-}
-
+};
 const saveData = (data) => { // Saving data to dataArray ;
-
+    console.log(data)
     for(let i=0;i<data.length;i++) {
         if(counter >= 4){ // Sort data and add page number to single record. Posible to change for display more results per page.
             page++;
@@ -64,13 +64,10 @@ const saveData = (data) => { // Saving data to dataArray ;
     }
     printResults(dataArray);
 };
-
 const displayPages = (pageNumber) => { // Printing  switch pages buttons
     const pages = document.createElement('div');
     pages.setAttribute('class','Pages');
     jobitem.appendChild(pages);
-
-
     // Mobile load pages  button 
     const pageitem = document.createElement('span');
     pageitem.setAttribute('class','Jobitem__mobile');
@@ -79,9 +76,7 @@ const displayPages = (pageNumber) => { // Printing  switch pages buttons
     jobitem.appendChild(pageitem);
 
     for(let i=0;i<= pageNumber+1;i++){
-        
         const pageitem = document.createElement('span');
-
         switch(i){ // arrow left
             case 0:
                 pageitem.setAttribute('class','Pages__page');
@@ -97,11 +92,8 @@ const displayPages = (pageNumber) => { // Printing  switch pages buttons
                     const id3 = document.getElementById(3);
                     const flexible =  document.getElementById(4);
                     const nextElement = document.getElementById(currentPage+1);
-    
                     if(!nextElement){ // Logic for middlebutton change
-                        if(currentPage === page){
-                            
-                        }else{
+                        if(currentPage !== page){
                             flexible.setAttribute('id', currentPage);
                             flexible.innerText = currentPage;
                         }
@@ -110,21 +102,16 @@ const displayPages = (pageNumber) => { // Printing  switch pages buttons
                         flexible.setAttribute('id', 3);
                         flexible.innerHTML = '3';
                     }
-    
                     flexible.setAttribute('class','Pages__page Flexible');
-    
                     // Tripple Dots
                     pages.insertBefore(dots, flexible);
-    
                     dots2.setAttribute('class','Pages__page--dots');
                     dots2.innerText = '...';
                     pages.appendChild(dots2);
                     pages.replaceChild(dots2,id3);
-    
                     dots.setAttribute('class','Pages__page--dots');
                     dots.innerText = '...';
                     pages.appendChild(dots);    
-    
                     i = page -1;
                     continue;
                 }
@@ -151,25 +138,20 @@ const displayPages = (pageNumber) => { // Printing  switch pages buttons
                 pageitem.innerText = i;
                 pageitem.setAttribute('id',i);
                 pages.appendChild(pageitem);
-
         }
     
     }
     pagesEventHandler();
 };
-
 const pagesEventHandler = () => { // Event handlers for switching pages and display more in mobile
     const pagesBtns = document.querySelectorAll('.Pages__page');
     const mobileBtn = document.getElementById('mobile');
-
     // Jobitems events listener
     document.querySelectorAll('.Jobitem').forEach(item => {  // City radio boxes
         item.addEventListener('click', event => {
         resultPage(event.target.id);
         });
     });
-
-    // Mobile button
     mobileBtn.addEventListener('click', event => {
         currentPage += 1;
         printResults(dataArray, true);
@@ -179,7 +161,6 @@ const pagesEventHandler = () => { // Event handlers for switching pages and disp
         const footer = document.getElementsByClassName('footer');
         mobileBtn.after(footer[0]);
     });
-    // end of mobile
     const currentElement = document.getElementById(currentPage);
     pagesBtns.forEach(btn => { // Rest buttons listeners
         btn.addEventListener('click', event => {
@@ -194,7 +175,6 @@ const pagesEventHandler = () => { // Event handlers for switching pages and disp
                 if(currentPage === page){
                     return;
                 }
-
                 currentPage += 1;
                 clearResults();
                 printResults(dataArray);
@@ -208,10 +188,9 @@ const pagesEventHandler = () => { // Event handlers for switching pages and disp
         currentElement.setAttribute('class', 'Pages__page Pages__page--active'); // Setting up Active button
     });
 };
-
 const printResults = (data, mobile = false) => { // display offerts
     for(let i = 0;i<data.length;i++) {
-
+        console.log(data);
         if(currentPage === data[i].page){
             const article = document.createElement('div');
             article.setAttribute('class','Jobitem');
@@ -241,9 +220,7 @@ const printResults = (data, mobile = false) => { // display offerts
             const posted = document.createElement('span');
             posted.setAttribute('class','Jobitem__posted');
             posted.innerHTML = countDaysAge(data[i].created_at);
-        
-        
-        
+
             article.appendChild(image);
             article.appendChild(company);
             article.appendChild(occupation);
@@ -256,27 +233,22 @@ const printResults = (data, mobile = false) => { // display offerts
        displayPages(page); // Display all buttons except mobile
     }
 };
-
 const countDaysAge = (date) => { // Counting days from posted
     let today = new Date();
     const dateArray = date.split(' ');
     return `<p>${Number(dateArray[2]) - today.getDate()} days ago</p>`;
 };
-
 const clearResults = () =>{ // Cleaner for results and buttons
     while (jobitem.firstChild) {
         jobitem.firstChild.remove();
     }
 };
-
 const submitButtonHandler = () => { // Sumbit form listener
     dataHandler(form.description, form.city, form.fulltime);
     clearResults();
 };
-
 const resultPage = (targetId) => {
     const id = Number(targetId.substr(1, targetId.length));
-
     const header = document.querySelector('.header__search');
     const mainfilter = document.querySelector('.main__filter');
     const resultPage = document.querySelector('.ResultPage');
@@ -291,9 +263,7 @@ const resultPage = (targetId) => {
     jobheader.inneHTML = `<h2>${dataArray[id].title}</h2><p>${dataArray[id].type}</p>`;
     
 };
-
-//////////////////// Event Listeners \\\\\\\\\\\\\\\\\\\\\\\
-
+/////////////////// Event Listeners \\\\\\\\\\\\\\\\\\\\\\\
 document.querySelectorAll('.checkbox__city').forEach(item => {  // City radio boxes
     item.addEventListener('click', event => {
       form.city = item.id;
@@ -320,8 +290,6 @@ document.querySelector('.ResultPage__sidebar--Returnbtn').addEventListener('clic
     jobitem.style.visibility = 'visible';
     resultPage.style.visibility = 'hidden';
 });
-
-
 // Submit Listeners 
 document.querySelector('.header__search--button').addEventListener('click', submitButtonHandler, false); 
 document.querySelector('.header__search--form').addEventListener('keypress',(e) => {
@@ -329,6 +297,4 @@ document.querySelector('.header__search--form').addEventListener('keypress',(e) 
         return submitButtonHandler();
     }
 });
-
-
 submitButtonHandler();
